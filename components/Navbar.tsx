@@ -9,14 +9,11 @@ export function Navbar() {
         <Logo />
         <div className="hidden items-center gap-8 md:flex">
           <Link href="/products" className="text-sm font-medium transition hover:text-green-400">Products</Link>
-          {productCategories.map((category) => (
-            <Link key={category.slug} href={`/products/${category.slug}`} className="text-sm font-medium transition hover:text-green-400">
-              {category.name}
-            </Link>
-          ))}
-          <Link href="/contact" className="rounded-lg bg-green-600 px-5 py-2.5 text-sm font-semibold shadow-lg shadow-green-900/20 transition hover:bg-green-500">
+          <Link href="/contact" className="text-sm font-medium transition hover:text-green-400">Contact Us</Link>
+          <Link href="/about" className="text-sm font-medium transition hover:text-green-400">About Us</Link>
+          {/* <Link href="/contact" className="rounded-lg bg-green-600 px-5 py-2.5 text-sm font-semibold shadow-lg shadow-green-900/20 transition hover:bg-green-500">
             Request quote
-          </Link>
+          </Link> */}
         </div>
         <Link href="/products" className="rounded-md border border-white/20 px-3 py-2 text-sm font-semibold md:hidden">Catalog</Link>
       </nav>
