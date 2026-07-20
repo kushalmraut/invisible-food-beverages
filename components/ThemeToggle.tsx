@@ -23,19 +23,22 @@ function MoonIcon() {
 }
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<ThemeMode>(() => {
-    if (typeof window === "undefined") {
-      return "dark";
-    }
-
-    const stored = window.localStorage.getItem("theme");
-    return stored === "light" ? "light" : "dark";
-  });
+  const [mounted, setMounted] = useState(false);
+  
+  // Statically default to dark to match the server's initial render
+  const [theme, setTheme] = useState<ThemeMode>("dark");
 
   useEffect(() => {
-    document.documentElement.classList.toggle("light", theme === "light");
-    document.documentElement.classList.toggle("dark", theme === "dark");
-  }, [theme]);
+    // Read the user's actual preference only after mounting on the client
+    const stored = window.localStorage.getItem("theme");
+    const initialTheme = stored === "light" ? "light" : "dark";
+    
+    setTheme(initialTheme);
+    document.documentElement.classList.toggle("light", initialTheme === "light");
+    document.documentElement.classList.toggle("dark", initialTheme === "dark");
+    
+    setMounted(true);
+  }, []);
 
   const toggleTheme = () => {
     const nextTheme = theme === "dark" ? "light" : "dark";
@@ -46,6 +49,21 @@ export function ThemeToggle() {
   };
 
   const isDark = theme === "dark";
+
+  // Render a placeholder with the exact same structure to prevent layout shift 
+  // before the client determines which icon to show.
+  if (!mounted) {
+    return (
+      <button
+        type="button"
+        className="theme-toggle-button"
+        aria-hidden="true"
+      >
+        <span className="theme-toggle-glow" />
+        <span className="relative z-10 block w-6 h-6" /> 
+      </button>
+    );
+  }
 
   return (
     <button
