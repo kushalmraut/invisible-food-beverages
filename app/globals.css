@@ -314,7 +314,12 @@ body {
 }
 
 .theme-hero-gradient-y {
-  background: linear-gradient(180deg, transparent, transparent, var(--hero-end));
+  background: linear-gradient(
+  90deg,
+  rgba(0, 0, 0, 0.12),
+  rgba(0, 0, 0, 0.05),
+  transparent
+);
 }
 
 .theme-active-border {

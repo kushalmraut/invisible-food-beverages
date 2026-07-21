@@ -44,8 +44,8 @@ export default function ContactPage() {
           <p className={`mb-8 text-lg font-medium sm:mb-10 sm:text-xl ${theme.textMuted}`}>
             Essential info for global buyers.
           </p>
-          <Link href="#contact-form" className={`inline-flex rounded-xl ${theme.btnBg} ${theme.btnText} ${theme.btnBgHover} px-8 py-4 font-bold transition shadow-lg`}>
-            Contact
+          <Link href="mailto:contact@invisiblefnb.com" className={`inline-flex rounded-xl ${theme.btnBg} ${theme.btnText} ${theme.btnBgHover} px-8 py-4 font-bold transition shadow-lg`}>
+            Email Us
           </Link>
         </div>
         
@@ -67,7 +67,7 @@ export default function ContactPage() {
       </section>
 
       {/* CONTACT FORM SECTION */}
-      <section id="contact-form" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+      {/* <section id="contact-form" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
         <div className={`grid gap-10 rounded-3xl border ${theme.border} ${theme.surface} p-5 sm:p-8 md:p-12 lg:grid-cols-[1.5fr_1fr] lg:gap-12`}>
           
           <form className="grid gap-6 md:grid-cols-2 md:gap-7">
@@ -134,7 +134,7 @@ export default function ContactPage() {
           </aside>
 
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

@@ -24,7 +24,7 @@ function MoonIcon() {
 
 export function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
-  
+
   // Statically default to dark to match the server's initial render
   const [theme, setTheme] = useState<ThemeMode>("dark");
 
@@ -32,11 +32,15 @@ export function ThemeToggle() {
     // Read the user's actual preference only after mounting on the client
     const stored = window.localStorage.getItem("theme");
     const initialTheme = stored === "light" ? "light" : "dark";
-    
+
+    // We disable the linter here because Next.js requires this exact pattern 
+    // to prevent Server/Client Hydration Mismatch errors.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTheme(initialTheme);
+
     document.documentElement.classList.toggle("light", initialTheme === "light");
     document.documentElement.classList.toggle("dark", initialTheme === "dark");
-    
+
     setMounted(true);
   }, []);
 

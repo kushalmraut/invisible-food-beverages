@@ -62,7 +62,7 @@ export default async function ProductDetailPage({
             <p className="mb-4 text-xl font-medium theme-text sm:text-2xl">{product.tagline}</p>
             <p className={`text-lg leading-relaxed ${theme.textMuted} mb-10 max-w-xl`}>{product.description}</p>
             <div className="flex flex-wrap gap-4">
-              <a href="#quote-form" className={`${theme.btnBg} ${theme.btnText} ${theme.btnBgHover} px-8 py-4 rounded-xl font-bold transition shadow-lg`}>Request Quote</a>
+              <a href="mailto:contact@invisiblefnb.com" className={`${theme.btnBg} ${theme.btnText} ${theme.btnBgHover} px-8 py-4 rounded-xl font-bold transition shadow-lg`}>Request Quote</a>
               <Link href="/products" className={`px-8 py-4 rounded-xl font-bold border ${theme.border} theme-surface-hover transition`}>Back to Catalog</Link>
             </div>
           </div>
@@ -138,7 +138,7 @@ export default async function ProductDetailPage({
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="mb-4 text-3xl font-bold sm:text-4xl">Ask about {product.name}</h2>
           <p className={`text-lg ${theme.textMuted} mb-8`}>Share destination, quantity, packaging preference, and target shipment timeline for a tailored export quote.</p>
-          <Link href="/contact" className={`${theme.btnBg} ${theme.btnText} ${theme.btnBgHover} inline-flex px-8 py-4 rounded-xl font-bold transition shadow-lg`}>Contact export team</Link>
+          <Link href="mailto:contact@invisiblefnb.com" className={`${theme.btnBg} ${theme.btnText} ${theme.btnBgHover} inline-flex px-8 py-4 rounded-xl font-bold transition shadow-lg`}>Contact export team</Link>
         </div>
       </section>
     </div>

@@ -43,7 +43,7 @@ export function Footer() {
         </div>
         <div className="footer-bottom mt-14 flex flex-col items-center gap-6 border-t pt-8 text-center text-sm font-semibold md:flex-row md:justify-center md:gap-12">
           <p>© 2026 Invisible Food and Beverages. All rights reserved.</p>
-          <div className="flex justify-center gap-7"><Link className="footer-link" href="/privacy">Privacy</Link><Link className="footer-link" href="/terms">Terms</Link><Link className="footer-link" href="/sitemap">Sitemap</Link></div>
+          {/* <div className="flex justify-center gap-7"><Link className="footer-link" href="/privacy">Privacy</Link><Link className="footer-link" href="/terms">Terms</Link><Link className="footer-link" href="/sitemap">Sitemap</Link></div> */}
         </div>
       </div>
     </footer>
