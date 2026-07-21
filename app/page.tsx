@@ -6,20 +6,20 @@ import { getCategory, getProductImage } from '@/lib/products';
 
 // Centralized theme variables for easy reusability and updates
 const theme = {
-  bg: "bg-[#091612]",
-  surface: "bg-[#11231D]",
-  surfaceHover: "hover:bg-[#1A332B]",
-  border: "border-white/5",
-  borderActive: "border-[#D4FF00]/50",
-  textMain: "text-white",
-  textMuted: "text-gray-400",
-  accentText: "text-[#D4FF00]",
-  btnBg: "bg-[#D4FF00]",
-  btnBgHover: "hover:bg-[#bce000]",
-  btnText: "text-[#091612]",
-  btnSecondaryBg: "bg-white/10",
-  btnSecondaryHover: "hover:bg-white/20",
-  btnSecondaryText: "text-white"
+  bg: "theme-page",
+  surface: "theme-surface",
+  surfaceHover: "theme-surface-hover",
+  border: "theme-border",
+  borderActive: "theme-active-border",
+  textMain: "theme-text",
+  textMuted: "theme-muted",
+  accentText: "theme-accent",
+  btnBg: "theme-button",
+  btnBgHover: "",
+  btnText: "",
+  btnSecondaryBg: "theme-secondary",
+  btnSecondaryHover: "",
+  btnSecondaryText: ""
 };
 
 // Custom Hook for Staggered Scroll Reveal
@@ -84,29 +84,39 @@ export default function HomePage() {
     {
       name: "Taylor Kim",
       role: "Procurement Manager",
-      quote: "PremiumAg Exports delivers consistent quality and timely shipments. Their reliability and professionalism are unmatched in the market.",
+      quote: "Invisible F&B Exports delivers consistent quality and timely shipments. Their reliability and professionalism are unmatched in the market.",
       image: "https://cdn.prod.website-files.com/6a5a98987cd29167503c9713/6a5a99bba9b7db7c12c86047_512b1c20-0989-4488-92fa-2e09877e0525.avif"
     },
     {
       name: "Jordan Ellis",
       role: "Head of Imports",
-      quote: "We count on PremiumAg Exports for dependable supply and clear communication. Their logistics expertise ensures every order runs smoothly.",
+      quote: "We count on Invisible F&B Exports for dependable supply and clear communication. Their logistics expertise ensures every order runs smoothly.",
       image: "https://cdn.prod.website-files.com/6a5a98987cd29167503c9713/6a5a99bba9b7db7c12c8604f_195dd1c1-b56c-4ddd-9bc3-6b7fed4ee921.avif"
     },
     {
       name: "Riley Chen",
       role: "Supply Chain Director",
-      quote: "Partnering with PremiumAg Exports has optimized our sourcing. Their certifications and precision give us total confidence.",
+      quote: "Partnering with Invisible F&B Exports has optimized our sourcing. Their certifications and precision give us total confidence.",
       image: "https://cdn.prod.website-files.com/6a5a98987cd29167503c9713/6a5a99bba9b7db7c12c8605f_3448c20c-6b93-4a15-bc4a-838189596cbe.avif"
     }
   ];
 
+
   useEffect(() => {
     const timer = window.setInterval(() => {
       setActiveTestimonial((current) => (current + 1) % testimonials.length);
-    }, 4000); // Increased slightly for better reading time
+    }, 3000);
+
     return () => window.clearInterval(timer);
   }, [testimonials.length]);
+
+  const showPreviousTestimonial = () => {
+    setActiveTestimonial((current) => (current - 1 + testimonials.length) % testimonials.length);
+  };
+
+  const showNextTestimonial = () => {
+    setActiveTestimonial((current) => (current + 1) % testimonials.length);
+  };
 
   return (
     <div className={`min-h-screen ${theme.bg} ${theme.textMain} font-sans`}>
@@ -119,8 +129,8 @@ export default function HomePage() {
             alt="Agricultural Field" 
             className="w-full h-full object-cover animate-slow-zoom"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#091612]/90 via-[#091612]/40 to-transparent"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#091612]"></div>
+          <div className="absolute inset-0 theme-hero-gradient-x"></div>
+          <div className="absolute inset-0 theme-hero-gradient-y"></div>
         </div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-12">
@@ -136,14 +146,14 @@ export default function HomePage() {
 
             {/* Right side: Subtext and Buttons */}
             <div className="max-w-md lg:mb-2 animate-fade-in-up" style={{ animationDelay: '200ms' }}>
-              <p className={`mb-8 text-base leading-relaxed sm:text-lg md:text-xl ${theme.textMuted}`}>
+              {/* <p className={`mb-8 text-base leading-relaxed sm:text-lg md:text-xl ${theme.textMuted}`}>
                 Premium grains, spices, coffee, and lentils.<br />Certified quality. Trusted global partner.
-              </p>
+              </p> */}
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/products" className={`${theme.btnBg} ${theme.btnText} ${theme.btnBgHover} px-8 py-3.5 font-medium transition text-center rounded-sm`}>
                   Browse catalog
                 </Link>
-                <Link href="/export-capabilities" className={`bg-transparent border border-white/20 text-white hover:bg-white/10 px-8 py-3.5 font-medium transition text-center rounded-sm`}>
+                <Link href="/export-capabilities" className={`bg-transparent border theme-border theme-secondary px-8 py-3.5 font-medium transition text-center rounded-sm`}>
                   How we export
                 </Link>
               </div>
@@ -153,13 +163,56 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* TRUST LOGOS SECTION */}
-      <section className="py-20 border-t border-white/5">
-        {/* ... (Keep existing trust logos code identical) ... */}
+      <section className={`py-24  ${theme.surface}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-semibold mb-4">Global trust, proven results</h2>
+            <p className={`text-lg ${theme.textMuted}`}>Hear from our international partners</p>
+          </div>
+
+          <div className="relative max-w-4xl mx-auto px-12 md:px-16">
+            <button onClick={showPreviousTestimonial} className="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/10 bg-white/5 p-3 text-white transition hover:border-[#D4FF00]/60 hover:bg-[#D4FF00] hover:text-[#091612]" aria-label="Previous testimonial">‹</button>
+            <button onClick={showNextTestimonial} className="absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/10 bg-white/5 p-3 text-white transition hover:border-[#D4FF00]/60 hover:bg-[#D4FF00] hover:text-[#091612]" aria-label="Next testimonial">›</button>
+            {/* Active Testimonial Card */}
+            <div className={`p-10 md:p-14 rounded-3xl ${theme.bg} border ${theme.border} mb-8 flex flex-col md:flex-row gap-10 items-center shadow-2xl shadow-black/20`}>
+              <div className="w-40 h-40 md:w-56 md:h-56 shrink-0 rounded-full overflow-hidden border-4 border-[#091612]">
+                <img 
+                  src={testimonials[activeTestimonial].image} 
+                  alt={testimonials[activeTestimonial].name} 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div>
+                <svg className={`w-10 h-10 ${theme.accentText} mb-6 opacity-50`} fill="currentColor" viewBox="0 0 32 32">
+                  <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-2.2 1.8-4 4-4V8zm18 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-2.2 1.8-4 4-4V8z"></path>
+                </svg>
+                <p className="text-xl md:text-2xl font-medium leading-relaxed mb-6">
+                  {`“${testimonials[activeTestimonial].quote}”`}
+                </p>
+                <div>
+                  <div className="font-bold text-lg">{testimonials[activeTestimonial].name}</div>
+                  <div className={theme.textMuted}>{testimonials[activeTestimonial].role}</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Testimonial Selectors */}
+            <div className="flex justify-center gap-4">
+              {testimonials.map((_, index) => (
+                <button 
+                  key={index}
+                  onClick={() => setActiveTestimonial(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${activeTestimonial === index ? `w-8 ${theme.btnBg}` : 'bg-white/20 hover:bg-white/40'}`}
+                  aria-label={`View testimonial ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* PERFORMANCE STATS SECTION (Staggered Scroll) */}
-      <section className={`py-16 sm:py-20 lg:py-24 ${theme.surface}`} ref={statsRef}>
+      <section className={`py-16 sm:py-20 lg:py-24 ${theme.bg} ${theme.textMain} `} ref={statsRef}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className={`text-center max-w-2xl mx-auto mb-16 transition-all duration-1000 ${statsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <h2 className="mb-4 text-3xl font-semibold sm:text-4xl">Export performance at a glance</h2>
@@ -167,15 +220,15 @@ export default function HomePage() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className={`p-8 rounded-2xl ${theme.bg} border ${theme.border} text-center transition-all duration-700 delay-100 ${statsVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+            <div className={`p-8 rounded-2xl ${theme.surface} border ${theme.border} text-center transition-all duration-700 delay-100 ${statsVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
               <div className={`${theme.textMuted} font-medium tracking-wide uppercase text-sm mb-2`}>On-time shipments</div>
               <div className={`text-4xl font-bold sm:text-5xl lg:text-6xl ${theme.accentText}`}>95%</div>
             </div>
-            <div className={`p-8 rounded-2xl ${theme.bg} border ${theme.border} text-center transition-all duration-700 delay-200 ${statsVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+            <div className={`p-8 rounded-2xl ${theme.surface} border ${theme.border} text-center transition-all duration-700 delay-200 ${statsVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
               <div className={`${theme.textMuted} font-medium tracking-wide uppercase text-sm mb-2`}>Exports annually</div>
               <div className={`text-4xl font-bold sm:text-5xl lg:text-6xl ${theme.accentText}`}>2,400</div>
             </div>
-            <div className={`p-8 rounded-2xl ${theme.bg} border ${theme.border} text-center transition-all duration-700 delay-300 ${statsVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+            <div className={`p-8 rounded-2xl ${theme.surface} border ${theme.border} text-center transition-all duration-700 delay-300 ${statsVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
               <div className={`${theme.textMuted} font-medium tracking-wide uppercase text-sm mb-2`}>Tons shipped monthly</div>
               <div className={`text-4xl font-bold sm:text-5xl lg:text-6xl ${theme.accentText}`}>1.2M</div>
             </div>
@@ -183,10 +236,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* TESTIMONIALS SECTION */}
-      <section className="py-24">
-        {/* ... (Keep existing testimonials code identical) ... */}
-      </section>
 
       {/* FEATURE GRID SECTION (Staggered Scroll + Enhanced Image Hover) */}
       <section className={`py-16 sm:py-20 lg:py-24 ${theme.surface} border-t ${theme.border}`} ref={featuresRef}>
@@ -207,7 +256,7 @@ export default function HomePage() {
               className={`lg:col-span-2 lg:row-span-2 rounded-2xl overflow-hidden ${theme.bg} border ${theme.border} group cursor-pointer ${theme.surfaceHover} transition-all duration-700 delay-100 ${featuresVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} block`}
             >
               <div className="aspect-video lg:aspect-[4/3] relative overflow-hidden">
-                <div className="absolute inset-0 bg-[#D4FF00]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 mix-blend-overlay"></div>
+                <div className="absolute inset-0 theme-accent-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 mix-blend-overlay"></div>
                 <img 
                   src={basmatiImage} 
                   alt="Premium Basmati Rice" 
@@ -215,8 +264,8 @@ export default function HomePage() {
                 />
               </div>
               <div className="relative z-20 p-6 sm:p-8">
-                <span className="inline-block px-3 py-1 bg-white/5 rounded-full text-xs tracking-wider uppercase mb-4 group-hover:bg-[#D4FF00] group-hover:text-[#091612] transition-colors">Grains</span>
-                <h3 className="text-2xl font-semibold mb-2 group-hover:text-[#D4FF00] transition-colors">Certified grains, global supply</h3>
+                <span className="inline-block px-3 py-1 theme-secondary rounded-full text-xs tracking-wider uppercase mb-4 group-hover:theme-button transition-colors">Grains</span>
+                <h3 className="text-2xl font-semibold mb-2 group-hover:theme-accent transition-colors">Certified grains, global supply</h3>
                 <p className={theme.textMuted}>Rice, wheat, and specialty grains for international buyers.</p>
               </div>
             </Link>
@@ -227,7 +276,7 @@ export default function HomePage() {
               className={`rounded-2xl overflow-hidden ${theme.bg} border ${theme.border} group cursor-pointer ${theme.surfaceHover} transition-all duration-700 delay-200 ${featuresVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} block`}
             >
               <div className="aspect-video relative overflow-hidden">
-                <div className="absolute inset-0 bg-[#D4FF00]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 mix-blend-overlay"></div>
+                <div className="absolute inset-0 theme-accent-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 mix-blend-overlay"></div>
                 <img 
                   src={turmericImage} 
                   alt="Turmeric" 
@@ -235,8 +284,8 @@ export default function HomePage() {
                 />
               </div>
               <div className="p-6 relative z-20">
-                <span className="inline-block px-3 py-1 bg-white/5 rounded-full text-xs tracking-wider uppercase mb-4 group-hover:bg-[#D4FF00] group-hover:text-[#091612] transition-colors">Spices</span>
-                <h3 className="text-lg font-semibold mb-2 group-hover:text-[#D4FF00] transition-colors">Whole spice excellence</h3>
+                <span className="inline-block px-3 py-1 theme-secondary rounded-full text-xs tracking-wider uppercase mb-4 group-hover:theme-button transition-colors">Spices</span>
+                <h3 className="text-lg font-semibold mb-2 group-hover:theme-accent transition-colors">Whole spice excellence</h3>
                 <p className={`text-sm ${theme.textMuted}`}>Pure, expertly processed spices for export.</p>
               </div>
             </Link>
@@ -247,7 +296,7 @@ export default function HomePage() {
               className={`rounded-2xl overflow-hidden ${theme.bg} border ${theme.border} group cursor-pointer ${theme.surfaceHover} transition-all duration-700 delay-300 ${featuresVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} block`}
             >
               <div className="aspect-video relative overflow-hidden">
-                <div className="absolute inset-0 bg-[#D4FF00]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 mix-blend-overlay"></div>
+                <div className="absolute inset-0 theme-accent-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 mix-blend-overlay"></div>
                 <img 
                   src={moringaImage} 
                   alt="Moringa Powder" 
@@ -255,29 +304,29 @@ export default function HomePage() {
                 />
               </div>
               <div className="p-6 relative z-20">
-                <span className="inline-block px-3 py-1 bg-white/5 rounded-full text-xs tracking-wider uppercase mb-4 group-hover:bg-[#D4FF00] group-hover:text-[#091612] transition-colors">Herbs</span>
-                <h3 className="text-lg font-semibold mb-2 group-hover:text-[#D4FF00] transition-colors">Clean herbal powders</h3>
+                <span className="inline-block px-3 py-1 theme-secondary rounded-full text-xs tracking-wider uppercase mb-4 group-hover:theme-button transition-colors">Herbs</span>
+                <h3 className="text-lg font-semibold mb-2 group-hover:theme-accent transition-colors">Clean herbal powders</h3>
                 <p className={`text-sm ${theme.textMuted}`}>Pure herbal ingredients for export.</p>
               </div>
             </Link>
 
             {/* Feature Text Blocks */}
-            <div className={`rounded-2xl p-6 ${theme.bg} border ${theme.border} hover:border-[#D4FF00]/30 cursor-pointer ${theme.surfaceHover} transition-all duration-700 delay-[400ms] ${featuresVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} flex flex-col justify-center`}>
+            <div className={`rounded-2xl p-6 ${theme.bg} border ${theme.border} theme-hover-border cursor-pointer ${theme.surfaceHover} transition-all duration-700 delay-[400ms] ${featuresVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} flex flex-col justify-center`}>
               <h3 className="text-lg font-semibold mb-2">Flexible export options</h3>
               <p className={`text-sm ${theme.textMuted}`}>Custom shipping and incoterms for every order.</p>
             </div>
             
-            <div className={`rounded-2xl p-6 ${theme.bg} border ${theme.border} hover:border-[#D4FF00]/30 cursor-pointer ${theme.surfaceHover} transition-all duration-700 delay-[500ms] ${featuresVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} flex flex-col justify-center`}>
+            <div className={`rounded-2xl p-6 ${theme.bg} border ${theme.border} theme-hover-border cursor-pointer ${theme.surfaceHover} transition-all duration-700 delay-[500ms] ${featuresVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} flex flex-col justify-center`}>
               <h3 className="text-lg font-semibold mb-2">End-to-end logistics</h3>
               <p className={`text-sm ${theme.textMuted}`}>Efficient handling from origin to port.</p>
             </div>
 
-            <div className={`rounded-2xl p-6 ${theme.bg} border ${theme.border} hover:border-[#D4FF00]/30 cursor-pointer ${theme.surfaceHover} transition-all duration-700 delay-[600ms] ${featuresVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} flex flex-col justify-center`}>
+            <div className={`rounded-2xl p-6 ${theme.bg} border ${theme.border} theme-hover-border cursor-pointer ${theme.surfaceHover} transition-all duration-700 delay-[600ms] ${featuresVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} flex flex-col justify-center`}>
               <h3 className="text-lg font-semibold mb-2">Global compliance</h3>
               <p className={`text-sm ${theme.textMuted}`}>Certified processes for international standards.</p>
             </div>
 
-            <div className={`rounded-2xl p-6 ${theme.bg} border ${theme.border} hover:border-[#D4FF00]/30 cursor-pointer ${theme.surfaceHover} transition-all duration-700 delay-[700ms] ${featuresVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} flex flex-col justify-center`}>
+            <div className={`rounded-2xl p-6 ${theme.bg} border ${theme.border} theme-hover-border cursor-pointer ${theme.surfaceHover} transition-all duration-700 delay-[700ms] ${featuresVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} flex flex-col justify-center`}>
               <h3 className="text-lg font-semibold mb-2">Scalable supply chain</h3>
               <p className={`text-sm ${theme.textMuted}`}>Consistent volume for large-scale buyers.</p>
             </div>
